@@ -1,0 +1,12 @@
+[user]
+	name = Dean
+	email = dnglaze@gmail.com
+[color]
+    ui = auto
+[alias]
+    st = status
+    ci = commit
+    co = checkout
+    br = branch
+[core]
+    editor = vim
