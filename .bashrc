@@ -1,3 +1,6 @@
+# If not running interactively, don't do anything
+[ -z "$PS1" ] && return
+
 export EDITOR=vim
 export VISUAL=$EDITOR
 export SVN_EDITOR=$EDITOR
@@ -18,10 +21,15 @@ shopt -s no_empty_cmd_completion
 
 # alias commands
 
-if [ "$TERM" != "dumb" ]; then
-    eval "`dircolors -b`"
+# enable color support of ls and also add handy aliases
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
     alias ls='ls --color=auto'
-    alias dir='ls --color=auto --format=vertical'
+    alias dir='dir --color=auto'
+
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
 fi
 
 # ls based aliases
@@ -124,6 +132,10 @@ if [ -f "$HOME/.proxy_settings" ]; then
     source "$HOME/.proxy_settings"
 fi
 
-if [ -f "$HOME/.bashrc_custom"]; then
+if [ -f "$HOME/.bashrc_custom" ]; then
     source "$HOME/.bashrc_custom"
+fi
+
+if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
+    . /etc/bash_completion
 fi
