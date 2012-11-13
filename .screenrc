@@ -1,0 +1,37 @@
+activity "%C -> %n%f %t activity!"
+bell "%C -> %n%f %t bell!~"
+sorendition kG
+caption always "%{WB}%H %{kG}%?%-Lw%?%{bw}%n*%f %t%?(%u)%?%{kG}%?%+Lw%? %88=%{YR}%M%d %94=%{RY}%c%="
+defhstatus "[$USER@^EH] screen"
+
+bind t screen -t top 0 top
+bind c screen -t bash 1 bash -l
+bind n screen -t netstat 2 sudo watch netstat -pan
+bind l screen -t lsof 3 sudo watch lsof -i
+
+screen -t bash 0 bash
+screen -t bash 1 bash
+screen -t top 2 top
+
+bindkey -k k7 prev
+bindkey -k k8 next
+
+bind .
+bind ^\
+bind \\
+bind K
+
+term rxvt
+
+termcapinfo xterm ti@:te@
+termcapinfo linux "ve=\E[?25h\E[?17;0;64c"
+defscrollback 1000
+shell /bin/bash
+startup_message off
+msgwait 2
+vbell on
+vbell_msg " *beep* "
+deflogin off
+silencewait 15
+
+altscreen on
